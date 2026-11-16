@@ -92,10 +92,9 @@ As duas partem de **cópias de `frozen.pt`**, mesmos dados, seed, métricas, bat
 | | Estratégia A | Estratégia B |
 |---|---|---|
 | Ideia | Descongelar `features[14:]` (estágio final 7×7) | Descongelar a base inteira |
-| LR | 1e-4 único | LR discriminativa (base 1e-5, cabeça 1e-4) |
+| LR | 1e-4 | 1e-4 (igual a A: só a profundidade do descongelamento muda) |
 | Hipótese | Ajusta features de alto nível com pouco risco de esquecer o ImageNet | Mais capacidade de adaptação ao domínio (lixo sujo, amassado), mais risco de overfitting com ~3,3 mil imagens de treino e mais custo |
 
-(Alternativa para B: descongelamento progressivo bloco a bloco.)
 
 **Verificar:** nº de parâmetros treináveis A < B, ambos > referência.
 
