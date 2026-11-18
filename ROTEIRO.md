@@ -13,7 +13,7 @@ Lauda: `Lauda CNN 2026_2.pdf` (Profa. Polyana — Inteligência Computacional/ML
 | Arquitetura | **MobileNetV2** (Sandler et al., CVPR 2018) — torchvision, pesos `IMAGENET1K_V2` |
 | Framework | PyTorch + torchvision (pesos e `transforms` oficiais já vêm juntos) |
 | Ambiente | **Local, CPU** (`.venv` + kernel Jupyter "Python (trabalho CNN)"). Colab só se o fine-tuning B ficar lento demais |
-| Integrantes | ⏳ |
+| Integrantes | Andrey Lourival Andrade Garcia, Andrey de Matos Gonçalves e Igor Cecim Vilhena |
 | Datas (defesa intermediária / entrega) | ⏳ |
 
 ### O dataset (conferido)
@@ -62,7 +62,7 @@ em notebooks prontos. Classes com confusão real (Paper × Cardboard, Plastic ×
 3. **Holdout estratificado 70/15/15** com seed fixa. Salvar `splits.csv`.
    O teste (~713 imagens, ~48 de Textile) é separado aqui e **não é tocado até a Etapa 7**.
 4. Pré-processamento: `weights.transforms()` do torchvision (resize 224, normalização ImageNet, RGB).
-   Data augmentation **só no treino**: flip horizontal/vertical, rotação, color jitter leve (resíduo na esteira não tem orientação fixa).
+   Data augmentation **só no treino**: RandomResizedCrop, flip horizontal/vertical e color jitter leve (resíduo na esteira não tem orientação fixa).
 5. Desbalanceamento: **CrossEntropy com peso por classe** (inverso da frequência no treino).
 6. Métricas:
    - Principal (seleção de modelo): **F1-macro** na validação — cada classe pesa igual, Textile não some atrás de Plastic.
