@@ -58,6 +58,6 @@ imagens_externas/                # Imagem externa usada no notebook de inferênc
 
 3. **Reexecutar o pipeline completo (`01_cnn_transfer_learning.ipynb`):**
    - Se `models/` contiver `frozen.pt`, `finetune_A.pt`, `finetune_B.pt` e seus arquivos `*_history.csv` / `*_info.json` (com `FORCE_RETRAIN = False`), o notebook carrega os checkpoints e executa todas as análises em alguns minutos.
-   - Se `data/realwaste-main/RealWaste` não existir, a Célula 3 baixa e extrai automaticamente o dataset da UCI (~656 MB). Sem `models/`, o treinamento completo roda em CPU (~1h46min no ambiente original).
+   - Se `data/realwaste-main/RealWaste` não existir, a Célula 3 baixa e extrai automaticamente o dataset da UCI (~656 MB). Sem `models/`, o notebook usa GPU (`cuda`) automaticamente se disponível ou roda em CPU (~1h46min no ambiente original).
 
-> **Nota sobre Google Colab:** o Colab já traz PyTorch, NumPy, Pandas, Pillow, Matplotlib e Scikit-learn pré-instalados. Não rode `pip install -r requirements.txt` no Colab (para não substituir o ambiente do Colab pela build `+cpu`). Para rodar o `02_inferencia.ipynb` lá, clone o repositório e envie `models/realwaste_mobilenetv2.pt` para `models/`.
+> **Nota sobre Google Colab:** o Colab já traz PyTorch com suporte a GPU (T4), NumPy, Pandas, Pillow, Matplotlib e Scikit-learn pré-instalados, e o notebook seleciona `cuda` automaticamente se houver GPU ativa. Não rode `pip install -r requirements.txt` no Colab (para não substituir o PyTorch GPU pela build `+cpu`). Para rodar o `02_inferencia.ipynb` lá, clone o repositório e envie `models/realwaste_mobilenetv2.pt` para `models/`.

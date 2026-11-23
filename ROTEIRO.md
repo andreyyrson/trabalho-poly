@@ -12,7 +12,7 @@ Lauda: `Lauda CNN 2026_2.pdf` (Profa. Polyana — Inteligência Computacional/ML
 | Dataset | **RealWaste** — UCI ML Repository (id 908), licença CC BY-NC-SA 4.0 |
 | Arquitetura | **MobileNetV2** (Sandler et al., CVPR 2018) — torchvision, pesos `IMAGENET1K_V2` |
 | Framework | PyTorch + torchvision (pesos e `transforms` oficiais já vêm juntos) |
-| Ambiente | **Local, CPU** (`.venv` Python 3.12). Compatível com Windows (`NUM_WORKERS=0`) e Linux/Ubuntu (`NUM_WORKERS=4`) |
+| Ambiente | **Local, CPU** (`.venv` Python 3.12) ou **GPU (`cuda`)** automática quando disponível (ex.: Colab). Windows (`NUM_WORKERS=0`), Linux/Ubuntu (`NUM_WORKERS` até 4) |
 | Integrantes | Andrey Lourival Andrade Garcia, Andrey de Matos Gonçalves e Igor Cecim Vilhena |
 | Status do código | Notebooks `01` e `02` implementados, executados em ordem e validados localmente |
 
