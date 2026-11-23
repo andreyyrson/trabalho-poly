@@ -12,9 +12,9 @@ Lauda: `Lauda CNN 2026_2.pdf` (Profa. Polyana — Inteligência Computacional/ML
 | Dataset | **RealWaste** — UCI ML Repository (id 908), licença CC BY-NC-SA 4.0 |
 | Arquitetura | **MobileNetV2** (Sandler et al., CVPR 2018) — torchvision, pesos `IMAGENET1K_V2` |
 | Framework | PyTorch + torchvision (pesos e `transforms` oficiais já vêm juntos) |
-| Ambiente | **Local, CPU** (`.venv` + kernel Jupyter "Python (trabalho CNN)"). Colab só se o fine-tuning B ficar lento demais |
+| Ambiente | **Local, CPU** (`.venv` Python 3.12). Compatível com Windows (`NUM_WORKERS=0`) e Linux/Ubuntu (`NUM_WORKERS=4`) |
 | Integrantes | Andrey Lourival Andrade Garcia, Andrey de Matos Gonçalves e Igor Cecim Vilhena |
-| Datas (defesa intermediária / entrega) | ⏳ |
+| Status do código | Notebooks `01` e `02` implementados, executados em ordem e validados localmente |
 
 ### O dataset (conferido)
 
@@ -50,8 +50,8 @@ em notebooks prontos. Classes com confusão real (Paper × Cardboard, Plastic ×
 ## 1. Arquitetura e dataset (Etapa 1)
 
 - [ ] Inscrever a equipe na planilha (garantir família + versão).
-- [ ] Pesquisa da arquitetura: autores/ano/artigo, diagrama dos blocos, inovação vs CNN convencional, diferencial da versão.
-- [ ] Contexto: triagem automatizada em esteira de reciclagem — câmera classifica o material e direciona o resíduo.
+- [x] Pesquisa da arquitetura: autores/ano/artigo, diagrama dos blocos, inovação vs CNN convencional, diferencial da versão.
+- [x] Contexto: triagem automatizada em esteira de reciclagem — câmera classifica o material e direciona o resíduo.
 
 **Verificar:** cada integrante consegue explicar o diagrama em 2 minutos sem ler.
 
@@ -61,7 +61,7 @@ em notebooks prontos. Classes com confusão real (Paper × Cardboard, Plastic ×
 2. Análise inicial: contagem por classe (gráfico de barras), grade de exemplos por classe, checagem de tamanho/canais.
 3. **Holdout estratificado 70/15/15** com seed fixa. Salvar `splits.csv`.
    O teste (~713 imagens, ~48 de Textile) é separado aqui e **não é tocado até a Etapa 7**.
-4. Pré-processamento: `weights.transforms()` do torchvision (resize 224, normalização ImageNet, RGB).
+4. Pré-processamento: `weights.transforms()` do torchvision (`Resize(232)` + `CenterCrop(224)`, normalização ImageNet, RGB).
    Data augmentation **só no treino**: RandomResizedCrop, flip horizontal/vertical e color jitter leve (resíduo na esteira não tem orientação fixa).
 5. Desbalanceamento: **CrossEntropy com peso por classe** (inverso da frequência no treino).
 6. Métricas:
@@ -124,27 +124,29 @@ As duas partem de **cópias de `frozen.pt`**, mesmos dados, seed, métricas, bat
 
 ## Entregas
 
-- [ ] `01_cnn_transfer_learning.ipynb` — integrantes, **declaração de uso de IA Generativa** (ferramenta, finalidade, extensão, validação), todas as etapas, markdown intercalado, executado em ordem com saídas salvas, dependências listadas.
-- [ ] `02_inferencia.ipynb` — carregamento + imagem externa.
-- [ ] Modelo salvo (link do Drive no Classroom — **não versionar no git**).
+- [x] `01_cnn_transfer_learning.ipynb` — integrantes, **declaração de uso de IA Generativa** (ferramenta, finalidade, extensão, validação), todas as etapas, markdown intercalado, executado em ordem com saídas salvas, dependências listadas.
+- [x] `02_inferencia.ipynb` — carregamento + imagem externa.
+- [ ] Modelo salvo (link do Drive / arquivo no Classroom — **não versionar no git**).
 - [ ] Slides (máx. 12 min, todos falam, foco em narrativa e resultados, não em código).
 
 ## Checklist da defesa intermediária
 
-- [ ] Arquitetura pesquisada (diagrama + blocos + inovação + diferencial da versão)
-- [ ] Dados analisados e preparados
-- [ ] Teste reservado + métricas e divisão definidas
-- [ ] Modelo congelado treinado, com curvas e resultados na validação
-- [ ] Análise visual preliminar
-- [ ] Estratégias A e B **planejadas**
+- [x] Arquitetura pesquisada (diagrama + blocos + inovação + diferencial da versão)
+- [x] Dados analisados e preparados
+- [x] Teste reservado + métricas e divisão definidas
+- [x] Modelo congelado treinado, com curvas e resultados na validação
+- [x] Análise visual preliminar
+- [x] Estratégias A e B implementadas e avaliadas
 
 ## Estrutura do repositório
 
 ```
+README.md
 ROTEIRO.md
 01_cnn_transfer_learning.ipynb
 02_inferencia.ipynb
 splits.csv          # split fixo, reprodutível
 requirements.txt
-.gitignore          # *.zip, RealWaste/, *.pt
+imagens_externas/   # imagem externa de teste
+.gitignore          # .venv/, data/, *.zip, models/
 ```
